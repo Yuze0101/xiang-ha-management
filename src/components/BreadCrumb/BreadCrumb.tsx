@@ -5,6 +5,7 @@ interface Props {}
 enum BreadCrumbType {
     home = '主页',
     product = '产品',
+    users = '用户',
 }
 type itemType = keyof typeof BreadCrumbType;
 export default function BreadCrumb({}: Props): ReactElement {
