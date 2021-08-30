@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from 'react';
-import { Card, Statistic } from 'antd';
+import { Card, Statistic, Descriptions } from 'antd';
 import { LikeOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import * as echarts from 'echarts';
@@ -122,10 +122,30 @@ export default function index({}: Props): ReactElement {
                 <Card className={styles.item}>
                     <div ref={pieChartRef} className={styles.chart}></div>
                 </Card>
+                <Card className={styles.item}>
+                    <div ref={barChartRef} className={styles.chart}></div>
+                </Card>
             </div>
             <div className={styles.container}>
                 <Card className={styles.item}>
-                    <div ref={barChartRef} className={styles.chart}></div>
+                    <Descriptions title="User Info">
+                        <Descriptions.Item label="UserName">
+                            Zhou Maomao
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Telephone">
+                            1810000000
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Live">
+                            Hangzhou, Zhejiang
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Remark">
+                            empty
+                        </Descriptions.Item>
+                        <Descriptions.Item label="Address">
+                            No. 18, Wantang Road, Xihu District, Hangzhou,
+                            Zhejiang, China
+                        </Descriptions.Item>
+                    </Descriptions>
                 </Card>
             </div>
         </>
