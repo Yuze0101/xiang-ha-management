@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Card } from 'antd';
+import styles from './index.less';
 import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 const { SubMenu, Item } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
@@ -7,7 +8,7 @@ interface Props {}
 
 export default function index(props: any): ReactElement {
     return (
-        <Layout>
+        <Layout className={styles.layout}>
             <Header>Header</Header>
             <Layout>
                 <Sider>
@@ -26,9 +27,9 @@ export default function index(props: any): ReactElement {
                         </SubMenu>
                     </Menu>
                 </Sider>
-                <Content>
-                    <BreadCrumb></BreadCrumb>
-                    {props.children}
+                <Content className={styles.content}>
+                    <BreadCrumb />
+                    <Card>{props.children}</Card>
                 </Content>
             </Layout>
             <Footer>Footer</Footer>
