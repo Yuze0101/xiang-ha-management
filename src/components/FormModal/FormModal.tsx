@@ -5,7 +5,7 @@ import React, {
     forwardRef,
     useImperativeHandle,
 } from 'react';
-import { Modal, Button, Form, Input, Spin } from 'antd';
+import { Modal, Form, Input, Spin } from 'antd';
 
 type ruleType = {}[];
 
