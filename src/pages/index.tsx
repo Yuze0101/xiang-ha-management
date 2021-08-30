@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Layout, Menu, Card } from 'antd';
+import { Layout, Menu } from 'antd';
 import styles from './index.less';
 import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 const { SubMenu, Item } = Menu;
@@ -29,7 +29,7 @@ export default function index(props: any): ReactElement {
                 </Sider>
                 <Content className={styles.content}>
                     <BreadCrumb />
-                    <Card>{props.children}</Card>
+                    {props.children}
                 </Content>
             </Layout>
             <Footer>Footer</Footer>
