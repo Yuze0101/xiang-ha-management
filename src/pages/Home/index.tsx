@@ -1,4 +1,6 @@
 import React, { ReactElement, useEffect, useRef } from 'react';
+import { Card, Statistic } from 'antd';
+import { LikeOutlined } from '@ant-design/icons';
 import styles from './index.less';
 import * as echarts from 'echarts';
 
@@ -90,20 +92,41 @@ export default function index({}: Props): ReactElement {
     return (
         <>
             <div className={styles.container}>
-                <div
-                    ref={lineChartRef}
-                    style={{ width: 500, height: 400 }}
-                ></div>
-                <div
-                    ref={pieChartRef}
-                    style={{ width: 500, height: 400 }}
-                ></div>
+                <Card className={styles.item}>
+                    <Statistic title="Active Users" value={112893} />
+                </Card>
+                <Card className={styles.item}>
+                    <Statistic
+                        title="Account Balance (CNY)"
+                        value={112893}
+                        precision={2}
+                    />
+                </Card>
+                <Card className={styles.item}>
+                    <Statistic
+                        title="Feedback"
+                        value={1128}
+                        prefix={<LikeOutlined />}
+                    />
+                </Card>
+                ,
+                <Card className={styles.item}>
+                    <Statistic title="Unmerged" value={93} suffix="/ 100" />
+                </Card>
             </div>
             <div className={styles.container}>
-                <div
-                    ref={barChartRef}
-                    style={{ width: 900, height: 300 }}
-                ></div>
+                <Card className={styles.item}>
+                    <div ref={lineChartRef} className={styles.chart}></div>
+                </Card>
+
+                <Card className={styles.item}>
+                    <div ref={pieChartRef} className={styles.chart}></div>
+                </Card>
+            </div>
+            <div className={styles.container}>
+                <Card className={styles.item}>
+                    <div ref={barChartRef} className={styles.chart}></div>
+                </Card>
             </div>
         </>
     );
