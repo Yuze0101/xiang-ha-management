@@ -1,4 +1,10 @@
-import React, { ReactElement, useState, useRef } from 'react';
+import React, {
+    ReactElement,
+    useState,
+    useRef,
+    forwardRef,
+    useImperativeHandle,
+} from 'react';
 import { Modal, Button, Form, Input, Spin } from 'antd';
 
 type ruleType = {}[];
@@ -14,10 +20,14 @@ interface Props {
 }
 
 /**
- * @param props {title: string, formItem: formItemType[]}
+ * @param props.title 标题
+ * @param props.formItem 表单项
+ * @param ref 引用实例ref
  * @description 表单弹窗
+ * @function ref.showModal 显示弹窗
  * @example
  *  const modalTitle = '注册';
+ *  const formModalRef = useRef<any>();
     const formItem = [
         {
             label: '用户名',
@@ -30,10 +40,13 @@ interface Props {
             rules: [{ required: true, message: '请输入密码' }],
         },
     ];
-    <FormModal title={modalTitle} formItem={formItem} />;
+    <FormModal title={modalTitle} formItem={formItem} ref={formModalRef}/>;
  */
 
-export default function FormModal(props: Props): ReactElement {
+const FormModal = forwardRef((props: Props, ref): ReactElement => {
+    useImperativeHandle(ref, () => ({
+        showModal,
+    }));
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isSpinning, setIsSpinning] = useState(false);
     const formEl = useRef<any>(null);
@@ -55,38 +68,34 @@ export default function FormModal(props: Props): ReactElement {
         setIsModalVisible(false);
     };
     return (
-        <>
-            <Button type="primary" onClick={showModal}>
-                Open Modal
-            </Button>
-            <Modal
-                title={props.title}
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                destroyOnClose={true}
-            >
-                <Spin tip="加载中..." spinning={isSpinning}>
-                    <Form
-                        name="basic"
-                        labelCol={{ span: 6 }}
-                        wrapperCol={{ span: 16 }}
-                        initialValues={{ remember: true }}
-                        ref={formEl}
-                    >
-                        {props.formItem.map((item: formItemType, index) => (
-                            <Form.Item
-                                key={index}
-                                label={item.label}
-                                name={item.name}
-                                rules={item.rules}
-                            >
-                                <Input />
-                            </Form.Item>
-                        ))}
-                    </Form>
-                </Spin>
-            </Modal>
-        </>
+        <Modal
+            title={props.title}
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            destroyOnClose={true}
+        >
+            <Spin tip="加载中..." spinning={isSpinning}>
+                <Form
+                    name="basic"
+                    labelCol={{ span: 6 }}
+                    wrapperCol={{ span: 16 }}
+                    initialValues={{ remember: true }}
+                    ref={formEl}
+                >
+                    {props.formItem.map((item: formItemType, index) => (
+                        <Form.Item
+                            key={index}
+                            label={item.label}
+                            name={item.name}
+                            rules={item.rules}
+                        >
+                            <Input />
+                        </Form.Item>
+                    ))}
+                </Form>
+            </Spin>
+        </Modal>
     );
-}
+});
+export default FormModal;

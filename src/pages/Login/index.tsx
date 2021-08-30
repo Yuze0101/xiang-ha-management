@@ -8,6 +8,7 @@ const { Header, Footer, Content } = Layout;
 interface Props {}
 
 export default function index({}: Props): ReactElement {
+    const formModalRef = React.useRef<any>(null);
     const modalTitle = '注册';
     const formItem = [
         {
@@ -21,6 +22,9 @@ export default function index({}: Props): ReactElement {
             rules: [{ required: true, message: '请输入密码' }],
         },
     ];
+    const handleRegister = () => {
+        formModalRef.current.showModal();
+    };
 
     const onFinish = (values: any) => {
         console.log('Success:', values);
@@ -78,11 +82,17 @@ export default function index({}: Props): ReactElement {
                                 登录
                             </Button>
                             {/* TODO 注册模态框 */}
-                            <Button type="default">注册</Button>
+                            <Button type="default" onClick={handleRegister}>
+                                注册
+                            </Button>
                         </Form.Item>
                     </Form>
                 </Card>
-                <FormModal title={modalTitle} formItem={formItem}></FormModal>
+                <FormModal
+                    title={modalTitle}
+                    formItem={formItem}
+                    ref={formModalRef}
+                ></FormModal>
             </Content>
             <Footer>Footer</Footer>
         </Layout>

@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 import { Layout, Menu } from 'antd';
+import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 const { SubMenu, Item } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
 interface Props {}
 
-export default function index({}: Props): ReactElement {
+export default function index(props: any): ReactElement {
     return (
         <Layout>
             <Header>Header</Header>
@@ -25,7 +26,10 @@ export default function index({}: Props): ReactElement {
                         </SubMenu>
                     </Menu>
                 </Sider>
-                <Content>Content</Content>
+                <Content>
+                    <BreadCrumb></BreadCrumb>
+                    {props.children}
+                </Content>
             </Layout>
             <Footer>Footer</Footer>
         </Layout>
