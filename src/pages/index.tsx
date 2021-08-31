@@ -1,34 +1,36 @@
 import React, { ReactElement } from 'react';
 import { Layout, Menu } from 'antd';
+import { Link } from 'umi';
 import styles from './index.less';
-import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
+// import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 const { SubMenu, Item } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
 interface Props {}
 
 export default function index(props: any): ReactElement {
+    const menuData = [
+        { id: 1, name: '主页', path: '/' },
+        { id: 2, name: '用户管理', path: '/users' },
+        { id: 3, name: '商品管理', path: '/product' },
+        { id: 4, name: '订单管理', path: '/order' },
+    ];
     return (
         <Layout className={styles.layout}>
             <Header>Header</Header>
             <Layout>
                 <Sider>
                     <Menu mode="inline">
-                        <Item key="1">1</Item>
-                        <Item key="2">2</Item>
-                        <Item key="3">3</Item>
-                        <Item key="4">4</Item>
-                        <SubMenu key="sub1" title="sub1">
-                            <Item key="5">5</Item>
-                            <Item key="6">6</Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" title="sub2">
-                            <Item key="7">7</Item>
-                            <Item key="8">8</Item>
-                        </SubMenu>
+                        {menuData.map((item) => {
+                            return (
+                                <Item key={item.id}>
+                                    <Link to={item.path}>{item.name}</Link>
+                                </Item>
+                            );
+                        })}
                     </Menu>
                 </Sider>
                 <Content className={styles.content}>
-                    <BreadCrumb />
+                    {/* <BreadCrumb /> */}
                     {props.children}
                 </Content>
             </Layout>
