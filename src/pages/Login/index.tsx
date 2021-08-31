@@ -1,6 +1,9 @@
 import React, { ReactElement } from 'react';
-import { Layout, Form, Input, Button, Card } from 'antd';
+import { Layout, Form, Input, Button, Card, message } from 'antd';
+import { history } from 'umi';
 import styles from './index.less';
+
+import { login } from '@/apis/admin';
 // 封装的表格模态框
 import FormModal from '@/components/FormModal/FormModal';
 
@@ -26,8 +29,15 @@ export default function index({}: Props): ReactElement {
         formModalRef.current.showModal();
     };
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = async (values: any) => {
+        const res = await login(values);
+        if (res.code === 200) {
+            localStorage.setItem('token', res.token);
+            history.push('/');
+            message.success(res.msg);
+        } else {
+            message.error(res.msg);
+        }
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -50,7 +60,7 @@ export default function index({}: Props): ReactElement {
                     >
                         <Form.Item
                             label="用户名"
-                            name="username"
+                            name="account"
                             rules={[
                                 {
                                     required: true,

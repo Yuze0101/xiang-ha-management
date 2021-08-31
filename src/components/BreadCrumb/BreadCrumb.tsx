@@ -15,7 +15,7 @@ export default function BreadCrumb({}: Props): ReactElement {
     const { pathname } = location;
     const pathArr = pathname.split('/');
     pathArr.unshift('');
-    console.log(pathname);
+    // console.log(pathname);
     const prefixPathname = '/home' + pathname;
     return (
         <Breadcrumb>
