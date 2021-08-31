@@ -1,34 +1,39 @@
 import React, { ReactElement } from 'react';
 import { Layout, Menu } from 'antd';
+import { Link, history } from 'umi';
 import styles from './index.less';
-import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
+// import BreadCrumb from '@/components/BreadCrumb/BreadCrumb';
 const { SubMenu, Item } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
 interface Props {}
 
 export default function index(props: any): ReactElement {
+    const { pathname } = history.location;
+    const menuData = [
+        { name: '主页', path: '/' },
+        { name: '管理员', path: '/admin' },
+        { name: '轮播图管理', path: '/broadcast' },
+        { name: '菜谱管理', path: '/cookmenu' },
+        { name: '商品管理', path: '/product' },
+        { name: '订单管理', path: '/order' },
+    ];
     return (
         <Layout className={styles.layout}>
             <Header>Header</Header>
             <Layout>
                 <Sider>
-                    <Menu mode="inline">
-                        <Item key="1">1</Item>
-                        <Item key="2">2</Item>
-                        <Item key="3">3</Item>
-                        <Item key="4">4</Item>
-                        <SubMenu key="sub1" title="sub1">
-                            <Item key="5">5</Item>
-                            <Item key="6">6</Item>
-                        </SubMenu>
-                        <SubMenu key="sub2" title="sub2">
-                            <Item key="7">7</Item>
-                            <Item key="8">8</Item>
-                        </SubMenu>
+                    <Menu mode="inline" selectedKeys={[pathname]}>
+                        {menuData.map((item) => {
+                            return (
+                                <Item key={item.path}>
+                                    <Link to={item.path}>{item.name}</Link>
+                                </Item>
+                            );
+                        })}
                     </Menu>
                 </Sider>
                 <Content className={styles.content}>
-                    <BreadCrumb />
+                    {/* <BreadCrumb /> */}
                     {props.children}
                 </Content>
             </Layout>
