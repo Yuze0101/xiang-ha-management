@@ -13,6 +13,7 @@ export default function index(props: any): ReactElement {
         { name: '主页', path: '/' },
         { name: '管理员', path: '/admin' },
         { name: '轮播图管理', path: '/broadcast' },
+        { name: '菜谱管理', path: '/cookmenu' },
         { name: '商品管理', path: '/product' },
         { name: '订单管理', path: '/order' },
     ];
