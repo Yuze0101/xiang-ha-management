@@ -63,6 +63,8 @@ export default function index({}: Props): ReactElement {
     const [broadcast, setBroadcast] = useState<BrodcastType[]>([]);
     const getAll = async () => {
         const res = await getAllSwiper();
+        console.log(123, res);
+
         if (res.meta.status === 200) {
             const result = res.message.map((item: BrodcastType) => {
                 item.key = item._id;
