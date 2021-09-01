@@ -5,7 +5,7 @@ interface Props {}
 export default function index({}: Props): ReactElement {
     return (
         <div>
-            <h1>order</h1>
+            <h1>vip</h1>
         </div>
     );
 }
