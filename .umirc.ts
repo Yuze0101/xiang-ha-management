@@ -11,19 +11,11 @@ export default defineConfig({
             component: '@/pages/index',
             routes: [
                 { path: '/', component: '@/pages/Home/index' },
-                {
-                    path: '/product',
-                    component: '@/pages/Product/index',
-                    routes: [
-                        {
-                            path: '/product/addproduct',
-                            component: '@/pages/Product/addProduct',
-                        },
-                    ],
-                },
                 { path: '/admin', component: '@/pages/Admin/index' },
-                { path: '/order', component: '@/pages/Order/index' },
+                { path: '/vip', component: '@/pages/Vip/index' },
+                { path: '/cookmenu', component: '@/pages/CookMenu/index' },
                 { path: '/broadcast', component: '@/pages/Broadcast/index' },
+                { path: '/meal', component: '@/pages/Meal/index' },
             ],
         },
     ],
