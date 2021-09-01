@@ -14,8 +14,8 @@ export default function index(props: any): ReactElement {
         { name: '管理员', path: '/admin' },
         { name: '轮播图管理', path: '/broadcast' },
         { name: '菜谱管理', path: '/cookmenu' },
-        { name: '商品管理', path: '/product' },
-        { name: '订单管理', path: '/order' },
+        { name: '会员管理', path: '/vip' },
+        { name: '套餐管理', path: '/meal' },
     ];
     return (
         <Layout className={styles.layout}>

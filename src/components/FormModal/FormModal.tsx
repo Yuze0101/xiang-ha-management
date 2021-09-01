@@ -5,7 +5,7 @@ import React, {
     forwardRef,
     useImperativeHandle,
 } from 'react';
-import { Modal, Form, Input, Spin } from 'antd';
+import { Modal, Form, Input, Spin, message } from 'antd';
 
 type ruleType = {}[];
 
@@ -16,6 +16,8 @@ type formItemType = {
 };
 interface Props {
     title: string;
+    action: (data: any) => Promise<any>;
+    parentAction?: () => void;
     formItem: formItemType[];
 }
 
@@ -40,7 +42,7 @@ interface Props {
             rules: [{ required: true, message: '请输入密码' }],
         },
     ];
-    <FormModal title={modalTitle} formItem={formItem} ref={formModalRef}/>;
+    <FormModal title={modalTitle} formItem={formItem} ref={formModalRef} action={异步请求}/>;
  */
 
 const FormModal = forwardRef((props: Props, ref): ReactElement => {
@@ -55,9 +57,18 @@ const FormModal = forwardRef((props: Props, ref): ReactElement => {
         setIsModalVisible(true);
     };
 
-    const handleOk = () => {
+    const handleOk = async () => {
         setIsSpinning(true);
-        console.log(formEl.current.getFieldsValue());
+        const target: {} = formEl.current.getFieldsValue();
+        const res = await props.action(target);
+        if (res.code === 200) {
+            setIsModalVisible(false);
+            message.success(res.msg || '操作成功');
+            typeof props.parentAction === 'function' && props.parentAction();
+            closeModal();
+        } else {
+            message.error(res.msg || '操作失败');
+        }
     };
 
     const handleCancel = () => {
@@ -90,7 +101,11 @@ const FormModal = forwardRef((props: Props, ref): ReactElement => {
                             name={item.name}
                             rules={item.rules}
                         >
-                            <Input />
+                            {item.name === 'password' ? (
+                                <Input.Password />
+                            ) : (
+                                <Input />
+                            )}
                         </Form.Item>
                     ))}
                 </Form>
