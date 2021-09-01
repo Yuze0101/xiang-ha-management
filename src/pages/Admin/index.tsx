@@ -130,7 +130,11 @@ export default function index({}: Props): ReactElement {
     );
     return (
         <Card title={cardTitle}>
-            <Table columns={columns} dataSource={adminList} />
+            <Table
+                columns={columns}
+                dataSource={adminList}
+                pagination={{ pageSize: 5 }}
+            />
             <FormModal
                 title={modalTitle}
                 formItem={formItem}
