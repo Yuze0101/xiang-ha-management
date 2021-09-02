@@ -18,6 +18,7 @@ interface Props {
     title: string;
     action: (data: any) => Promise<any>;
     parentAction?: () => void;
+    parentParams?: any;
     formItem: formItemType[];
 }
 
@@ -59,9 +60,20 @@ const FormModal = forwardRef((props: Props, ref): ReactElement => {
 
     const handleOk = async () => {
         setIsSpinning(true);
-        const target: {} = formEl.current.getFieldsValue();
+        const target: any = formEl.current.getFieldsValue();
+        if (typeof props.parentParams !== 'undefined') {
+            target._id = props.parentParams;
+            console.log(target);
+        }
         const res = await props.action(target);
+        console.log(res);
+
         if (res.code === 200) {
+            setIsModalVisible(false);
+            message.success(res.msg || '操作成功');
+            typeof props.parentAction === 'function' && props.parentAction();
+            closeModal();
+        } else if (res.meta.status === 200) {
             setIsModalVisible(false);
             message.success(res.msg || '操作成功');
             typeof props.parentAction === 'function' && props.parentAction();
