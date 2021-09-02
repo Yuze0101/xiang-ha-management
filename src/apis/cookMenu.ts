@@ -28,11 +28,13 @@ type updateType = {
     needTime: string;
 };
 
-export const getAllMenu = (data: pageType) => {
+export const getAllMenu = (data?: pageType) => {
+    console.log(data);
+
     return request.post('/admin/findAllMenu', { data });
 };
 
-export const searchMenu = (data: searchType) => {
+export const searchMenu = (data?: searchType) => {
     return request.post('/admin/searchMenu', { data });
 };
 
