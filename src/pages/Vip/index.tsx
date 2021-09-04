@@ -64,7 +64,7 @@ export default function index({}: Props): ReactElement {
             dataIndex: 'vipdate',
             key: 'vipdate',
             render: (text: string, item: Member) => (
-                <div key={item.key}>{text}</div>
+                <div key={item.key}>{text ? text : '已到期'}</div>
             ),
         },
         {

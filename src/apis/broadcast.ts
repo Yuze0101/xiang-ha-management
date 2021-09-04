@@ -19,6 +19,7 @@ type SwiperType = {
  * @param {string} data.open_type 打开方式
  * @description 添加轮播图
  */
+
 export const addSwiper = (data: SwiperType) => {
     return request.post('/admin/addSwiper', { data });
 };
